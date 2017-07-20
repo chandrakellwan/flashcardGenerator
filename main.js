@@ -3,29 +3,48 @@ var BasicCard=require("./basicCard.js");
 var ClozeCard=require("./basicCard.js");
 var inquirer=require("inquirer");
 var basicFlashcards=[];
-var clozeFlashcard=[];
+var clozeFlashcards=[];
 var score;
 var x=0;
 var i=0;
 
 
 basicFlashcards.push(new BasicCard(
-	"Front: I go in hard, I come out soft, you blow me hard, what am I?", "Gum"));
+	"I go in hard, I come out soft, and you blow me hard, what am I?", "gum"));
 
 basicFlashcards.push(new BasicCard(
-	"Front: The more you take, the more of me you leave behind. What am I?", "Footsteps"));
+	"The more you take, the more of me you leave behind. What am I?", "footsteps"));
 
 basicFlashcards.push(new BasicCard(
-	"Front: What do you call a Bear without an ear?", "B"));
+	"What do you call a bear without an ear?", "b"));
 
 basicFlashcards.push(new BasicCard(
-	"Front: What room do ghosts avoid?", "The living room"));
+	"What room do ghosts avoid?", "the living room"));
 
 basicFlashcards.push(new BasicCard(
-	"Front: ", "  "));
+	"What travels around the world, but stays in one spot?", "a stamp"));
 
 basicFlashcards.push(new BasicCard(
-	"Front: ", "  "));
+	"In a race, you pass the person in second place. What place are you in now?", "second"));
+
+clozeFlashcards.push(new ClozeCard(
+	"Gum goes in hard, comes out soft, you it hard.", "Gum"));
+
+clozeFlashcards.push(new ClozeCard(
+	"The more footsteps you take, the more of you leave behind.", "footsteps"));
+
+clozeFlashcards.push(new ClozeCard(
+	"B is what you call a Bear without an ear.", "B"));
+
+clozeFlashcards.push(new ClozeCard(
+	"The living room is the room ghosts avoid.", "The living room"));
+
+clozeFlashcards.push(new ClozeCard(
+	"A stamp travels around the world, but stays in one spot?", "A stamp"));
+
+clozeFlashcards.push(new ClozeCard(
+	"In a race, you just passed the person in Second place, you are now in second place.", "second"));
+
 
 function startSession(){
 	score=0;
@@ -46,14 +65,135 @@ function startSession(){
 		choices: ["Basic Cards", "Cloze Cards"]
 	}
 	]).then(function(choice){
-		if (choice.cardType==="Basic Cards"){
+		if (choice.cardType === "Basic Cards"){
 			playBasic(0);
 		}
 		else {
-			console.log("Fill in the blank:")
-			playCloze(0);
-		};
+				console.log("Fill in the blanks:")
+				playCloze(0);
+			};
+		});
+	};
 
-	});
+
+function playBasic() {
+	
+	if (i < 6) {
+			inquirer.prompt([
+			{	
+				type: "input",
+				name: "card",
+				message: basicFlashcards[i].front		
+			}
+			]).then(function(response) {
+
+					if (response.card === basicFlashcards[i].back) {
+						console.log("");
+						console.log("Right!");
+						console.log("");
+						i++;
+						score++;
+						playBasic();
+					}
+					else {
+						console.log("Nope!");
+						console.log("The answer is " + basicFlashcards[i].back);
+						i++;
+						
+						playBasic();	
+					}
+			});	
+	}
+	else {
+		console.log("");
+		console.log("..............................");
+		console.log("");
+		console.log("Go study some more!");
+		console.log("");
+		console.log("You Scored: " + score + "/6");
+		console.log("");
+		console.log("..............................");
+		console.log("");
+		inquirer.prompt([
+		{
+			type: "list",
+			name: "newGame",
+			message: "Try Again?",
+			choices: ["Yes", "No"]
+			
+		}
+		]).then(function(response) {
+			if (response.newGame === "Yes") {
+				startSession();
+				score = 0;
+				x = 0;
+				i = 0;
+			}
+			 
+		});
+		
+	};
 };
+
+
+
+function playCloze() {
+	
+	if (x < 6) {
+			inquirer.prompt([
+			{	
+				type: "input",
+				name: "card",
+				message: clozeFlashcards[x].partial		
+			}
+			]).then(function(response) {
+
+					if (response.card === clozeFlashcards[x].cloze) {
+						console.log("Right!");
+						x++;
+						score++;
+						playCloze();
+					}
+					else {
+						console.log("Nope!");
+						console.log("The answer is " + clozeFlashcards[x].cloze);
+						x++;
+						
+						playCloze();	
+					}
+			});	
+	}
+	else {
+		console.log("");
+		console.log("..............................");
+		console.log("");
+		console.log("Go study some more!");
+		console.log("");
+		console.log("You Scored: " + score + "/6");
+		console.log("");
+		console.log("..............................");
+		console.log("");
+		inquirer.prompt([
+		{
+			type: "list",
+			name: "newGame",
+			message: "Try Again?",
+			choices: ["Yes", "No"]
+			
+		}
+		]).then(function(response) {
+			if (response.newGame === "Yes") {
+				score = 0;
+				x = 0;
+				i = 0;
+				startSession();
+
+			}
+			 
+		});
+		
+	};
+};
+
+startSession();
 
