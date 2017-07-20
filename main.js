@@ -28,10 +28,10 @@ basicFlashcards.push(new BasicCard(
 	"In a race, you pass the person in second place. What place are you in now?", "second"));
 
 clozeFlashcards.push(new ClozeCard(
-	"Gum goes in hard, comes out soft, you it hard.", "Gum"));
+	"Gum goes in hard, comes out soft, you blow it hard.", "Gum"));
 
 clozeFlashcards.push(new ClozeCard(
-	"The more footsteps you take, the more of you leave behind.", "footsteps"));
+	"The more footsteps you take, the more you leave behind.", "footsteps"));
 
 clozeFlashcards.push(new ClozeCard(
 	"B is what you call a Bear without an ear.", "B"));
@@ -75,7 +75,7 @@ function startSession(){
 		});
 	};
 
-
+//
 function playBasic() {
 	
 	if (i < 6) {
@@ -120,7 +120,6 @@ function playBasic() {
 			name: "newGame",
 			message: "Try Again?",
 			choices: ["Yes", "No"]
-			
 		}
 		]).then(function(response) {
 			if (response.newGame === "Yes") {
@@ -134,8 +133,6 @@ function playBasic() {
 		
 	};
 };
-
-
 
 function playCloze() {
 	
@@ -188,10 +185,8 @@ function playCloze() {
 				i = 0;
 				startSession();
 
-			}
-			 
+			} 
 		});
-		
 	};
 };
 
