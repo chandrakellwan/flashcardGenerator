@@ -1,6 +1,6 @@
 // declare require variables
 var BasicCard=require("./basicCard.js");
-var ClozeCard=require("./basicCard.js");
+var ClozeCard=require("./clozeCard.js");
 var inquirer=require("inquirer");
 var basicFlashcards=[];
 var clozeFlashcards=[];
