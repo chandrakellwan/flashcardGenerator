@@ -5,4 +5,4 @@ function ClozeCard(text, cloze){
 }
 
 
-module.expoets=ClozeCard;
+module.exports=ClozeCard;
