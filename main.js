@@ -8,7 +8,7 @@ var score;
 var x=0;
 var i=0;
 
-
+//Used to make Basic flashcards
 basicFlashcards.push(new BasicCard(
 	"I go in hard, I come out soft, and you blow me hard, what am I?", "gum"));
 
@@ -27,6 +27,7 @@ basicFlashcards.push(new BasicCard(
 basicFlashcards.push(new BasicCard(
 	"In a race, you pass the person in second place. What place are you in now?", "second"));
 
+//Used to make Cloze flashcards
 clozeFlashcards.push(new ClozeCard(
 	"Gum goes in hard, comes out soft, you blow it hard.", "Gum"));
 
@@ -45,7 +46,7 @@ clozeFlashcards.push(new ClozeCard(
 clozeFlashcards.push(new ClozeCard(
 	"In a race, you just passed the person in Second place, you are now in second place.", "second"));
 
-
+//function used to start game 
 function startSession(){
 	score=0;
 	console.log("");
@@ -64,6 +65,7 @@ function startSession(){
 		message: "Please choose type of flashcards:",
 		choices: ["Basic Cards", "Cloze Cards"]
 	}
+	// function used to choose type of card
 	]).then(function(choice){
 		if (choice.cardType === "Basic Cards"){
 			playBasic(0);
@@ -75,7 +77,7 @@ function startSession(){
 		});
 	};
 
-//
+//function used to determine if answer is right in basic cards
 function playBasic() {
 	
 	if (i < 6) {
@@ -133,7 +135,7 @@ function playBasic() {
 		
 	};
 };
-
+//function used to determine if answer is right in cloze cards
 function playCloze() {
 	
 	if (x < 6) {
@@ -160,6 +162,7 @@ function playCloze() {
 					}
 			});	
 	}
+	// gives score 
 	else {
 		console.log("");
 		console.log("..............................");
@@ -178,6 +181,7 @@ function playCloze() {
 			choices: ["Yes", "No"]
 			
 		}
+		// function used to ask to play again and restart game or not
 		]).then(function(response) {
 			if (response.newGame === "Yes") {
 				score = 0;
