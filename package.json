@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/chandrakellwan/flashcardGenerator/issues"
   },
-  "homepage": "https://github.com/chandrakellwan/flashcardGenerator#readme"
+  "homepage": "https://github.com/chandrakellwan/flashcardGenerator#readme",
+  "dependencies": {
+    "inquirer": "^3.2.1"
+  }
 }
